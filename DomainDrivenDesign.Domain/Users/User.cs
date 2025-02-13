@@ -6,17 +6,20 @@ namespace DomainDrivenDesign.Domain.Users;
 
 public sealed class User:Entity
 {
-    public User(Guid id) : base(id)
+    public User(Guid id,Name Name,Email Email,Password Password,Address Address):base(id)
     {
+        Name = Name;
+        Email = Email;
+        Password = Password;
+        Address = Address;
     }
 
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string Country {  get; set; }
-    public string City {  get; set; }
-    public string Street {  get; set; }
-    public string FullAddress {  get; set; }
-    public string PostalCode { get; set; }
-
+    public Name Name { get; private set; }
+    public Email Email { get; private set; }
+    public Password Password { get;private set; }
+    public Address Address { get; private set; }
+    public void ChangeName(string name)
+    {
+        name = new(name);
+    }
 }

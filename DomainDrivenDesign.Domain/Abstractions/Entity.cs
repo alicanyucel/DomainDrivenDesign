@@ -21,4 +21,5 @@ public abstract class Entity : IEquatable<Entity>
         }
         return entity.Id == Id;
     }
+
 }
