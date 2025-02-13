@@ -6,5 +6,5 @@ public sealed class Order
     public string OrderNumber { get; set; }
     public DateTime CreatedDate { get; set; }
     public OrderStatusEnum Status { get; set; }
-    public ICollection<OrderLine> orderLines { get; set; }
+    public ICollection<OrderLine> OrderLines { get; set; }
 }
