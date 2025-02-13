@@ -1,7 +1,7 @@
 ﻿
 
 namespace DomainDrivenDesign.Domain.Users;
-
+// git sync
 public sealed class User
 {
     public Guid Id { get; set; }
