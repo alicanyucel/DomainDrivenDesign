@@ -1,13 +1,14 @@
-﻿
-
-using DomainDrivenDesign.Domain.Abstractions;
+﻿using DomainDrivenDesign.Domain.Abstractions;
 using DomainDrivenDesign.Domain.Shared;
-
-namespace DomainDrivenDesign.Domain.Users;
-
+using DomainDrivenDesign.Domain.Users;
+namespace DomainDrivenDesignUdemy.Domain.Users;
 public sealed class User : Entity
 {
-    public User(Guid id, Name name, Email email, Password password, Address address) : base(id)
+    private User(Guid id) : base(id)
+    {
+
+    }
+    private User(Guid id, Name name, Email email, Password password, Address address) : base(id)
     {
         Name = name;
         Email = email;
@@ -19,20 +20,38 @@ public sealed class User : Entity
     public Email Email { get; private set; }
     public Password Password { get; private set; }
     public Address Address { get; private set; }
+
+    public static User CreateUser(string name, string email, string password, string country, string city, string street, string postalCode, string fullAddress)
+    {
+        //İş Kuralları
+        User user = new(
+            id: Guid.NewGuid(),
+            name: new(name),
+            email: new(email),
+            password: new(password),
+            address: new(country, city, street, fullAddress, postalCode));
+
+        return user;
+
+    }
+
     public void ChangeName(string name)
     {
-        name = new(name);
+        Name = new(name);
     }
+
+    public void ChangeAddress(string country, string city, string street, string postalCode, string fullAddress)
+    {
+        Address = new(country, city, street, fullAddress, postalCode);
+    }
+
     public void ChangeEmail(string email)
     {
         Email = new(email);
     }
+
     public void ChangePassword(string password)
     {
-        password = new(password);
-    }
-    public void ChangeAddress(string country,string city,string street,string postalcode,string fulladdress)
-    {
-        Address=new(country,city,street,postalcode,fulladdress);
+        Password = new(password);
     }
 }
