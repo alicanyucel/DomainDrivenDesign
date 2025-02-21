@@ -2,7 +2,7 @@
 
 namespace DomainDrivenDesign.Application.Features.Users.CreateUser;
 
-public sealed class CreateUserCommand(string Name,
+public sealed record CreateUserCommand(string Name,
     string Email,
     string Password,
     string Country,

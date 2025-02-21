@@ -1,20 +1,39 @@
-﻿using DomainDrivenDesign.Domain.Users;
+﻿using DomainDrivenDesign.Domain.Abstractions;
+using DomainDrivenDesign.Domain.Users;
+using DomainDrivenDesign.Domain.Users.Events;
 using MediatR;
 
 namespace DomainDrivenDesign.Application.Features.Users.CreateUser;
 
-internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+internal sealed class CreateUserCommandHander : IRequestHandler<CreateUserCommand>
 {
     private readonly IUserRepository _userRepository;
-    public CreateUserCommandHandler(IUserRepository userRepository)
+    private readonly IUnitofWork _unitOfWork;
+    private readonly IMediator _mediator;
+
+    public CreateUserCommandHander(IUserRepository userRepository, IUnitofWork unitOfWork, IMediator mediator)
     {
         _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
+        _mediator = mediator;
     }
+
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        await _userRepository.CreateUser(request.Name,request.Email,request.Password,request.City,request.Street
-     
-     }
+        //iş kuralları
+        var user = await _userRepository.CreateAsync(
+            request.Name,
+            request.Email,
+            request.Password,
+            request.Country,
+            request.City,
+            request.Street,
+            request.PostalCode,
+            request.FullAddress,
+            cancellationToken);
 
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await _mediator.Publish(new UserDomainEvent(user));
+    }
 }
-
