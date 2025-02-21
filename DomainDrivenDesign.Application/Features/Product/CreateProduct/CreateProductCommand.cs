@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using MediatR;
 
 namespace DomainDrivenDesign.Application.Features.Product.AddProduct
 {
-    internal class CreateProductCommand
-    {
-    }
+    public sealed record CreateProductCommand(
+      string Name,
+      int Quantity,
+      decimal Amount,
+      string Currency,
+      Guid CategoryId) : IRequest;
 }
