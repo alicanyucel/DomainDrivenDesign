@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DomainDrivenDesignUdemy.Domain.Users;
+using MediatR;
 
 namespace DomainDrivenDesign.Domain.Users.Events;
 public sealed class UserDomainEvent : INotification
