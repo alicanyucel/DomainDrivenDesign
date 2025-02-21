@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DomainDrivenDesignUdemy.Domain.Users;
+using MediatR;
 
-namespace DomainDrivenDesign.Application.Features.Users.GetAllUser
-{
-    internal class GetAllUserQuery
-    {
-    }
-}
+namespace DomainDrivenDesign.Application.Features.Users.GetAllUser;
+
+public sealed record GetAllUserQuery():IRequest<List<User>>;

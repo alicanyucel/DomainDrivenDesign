@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainDrivenDesign.Application.Features.Users.UpdateUser
+namespace DomainDrivenDesign.Application.Features.Product.AddProduct
 {
-    internal class UpdateUserCommand
+    internal class CreateProductCommand
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainDrivenDesign.Application.Features.Users.DeleteUser
+namespace DomainDrivenDesign.Application.Features.Product.CreateProduct
 {
-    internal class DeleteUserCommand
+    internal class CreateProductCommandHandler
     {
     }
 }

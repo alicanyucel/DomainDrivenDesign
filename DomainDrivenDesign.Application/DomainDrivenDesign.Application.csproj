@@ -14,4 +14,8 @@
     <ProjectReference Include="..\DomainDrivenDesign.Domain\DomainDrivenDesign.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Product\GetAllProduct\" />
+  </ItemGroup>
+
 </Project>
