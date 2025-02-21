@@ -8,6 +8,17 @@ namespace DomainDrivenDesign.Domain.Orders;
 
 public sealed class OrderLine:Entity
 {
+    private Guid ıd;
+    private int v;
+
+    public OrderLine(Guid id, Guid ıd, Guid productId, int quantity, int v) : base(id)
+    {
+        this.ıd = ıd;
+        ProductId = productId;
+        Quantity = quantity;
+        this.v = v;
+    }
+
     public OrderLine(Guid id,Guid orderId,Guid productId,Product product,int quantity,Money price):base(id)
     {
         ProductId = productId;
@@ -21,4 +32,5 @@ public sealed class OrderLine:Entity
     public Product Product { get;private set; }
     public int Quantity {  get;private set; }
     public Money Price {  get;private set; }
+    public decimal Currency { get; internal set; }
 }
