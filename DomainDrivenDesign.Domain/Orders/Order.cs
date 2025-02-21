@@ -1,11 +1,16 @@
 ﻿using DomainDrivenDesign.Domain.Abstractions;
+using DomainDrivenDesign.Domain.Orders;
 using DomainDrivenDesign.Domain.Shared;
+using DomainDrivenDesignUdemy.Domain.Orders;
+using static DomainDrivenDesign.Domain.Orders.Order;
 
-namespace DomainDrivenDesign.Domain.Orders;
-
-public sealed partial class Order : Entity
+public sealed class Order : Entity
 {
-    public Order(Guid id, string orderNumber, DateTime createdDate, OrderStatusEnum status, ICollection<OrderLine> orderLines) : base(id)
+    private Order(Guid id) : base(id)
+    {
+
+    }
+    public Order(Guid id, string orderNumber, DateTime createdDate, OrderStatusEnum status) : base(id)
     {
         OrderNumber = orderNumber;
         CreatedDate = createdDate;
@@ -15,32 +20,38 @@ public sealed partial class Order : Entity
     public string OrderNumber { get; private set; }
     public DateTime CreatedDate { get; private set; }
     public OrderStatusEnum Status { get; private set; }
-    public ICollection<OrderLine> OrderLines { get; private set; }
-    public void CreateOrder(Guid pdroductId, int Quantity, decimal amount, string currency)
+    public ICollection<OrderLine> OrderLines { get; private set; } = new List<OrderLine>();
+
+    public void CreateOrder(List<CreateOrderDto> createOrderDtos)
     {
-        foreach (var item in OrderLines)
+        foreach (var item in createOrderDtos)
         {
             if (item.Quantity < 1)
             {
-                throw new ArgumentException("quantity 1 den küçük olamaz");
+                throw new ArgumentException("Sipariş adedi 1 den az olamaz!");
             }
+
+            //kalan iş kuralları
+
             OrderLine orderLine = new(
                 Guid.NewGuid(),
                 Id,
                 item.ProductId,
                 item.Quantity,
-                new(item.Amount,Currency.FromCode(Currency);
-            OrderLines.Add(orderLine);
+                new(item.Amount, Currency.FromCode(item.Currency)));
 
+            OrderLines.Add(orderLine);
         }
     }
+
     public void RemoveOrderLine(Guid orderLineId)
     {
-        var orderdLine = OrderLines.FirstOrDefault(p => p.Id == orderLineId);
-        if (orderdLine is null)
+        var orderLine = OrderLines.FirstOrDefault(p => p.Id == orderLineId);
+        if (orderLine is null)
         {
-            throw new ArgumentException("silmek istediğiniz sipariş bulunamadı");
+            throw new ArgumentException("Silmek istediğiniz sipariş kalemi bulunamadı!");
         }
-        OrderLines.Remove(orderdLine);
+
+        OrderLines.Remove(orderLine);
     }
 }
