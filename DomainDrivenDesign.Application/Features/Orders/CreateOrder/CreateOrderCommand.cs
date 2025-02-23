@@ -1,5 +1,5 @@
-﻿using MediatR;
-using static DomainDrivenDesign.Domain.Orders.Order;
+﻿using DomainDrivenDesign.Domain.Orders;
+using MediatR;
 
 namespace DomainDrivenDesign.Application.Features.Orders.CreateOrder;
 public sealed record CreateOrderCommand(

@@ -20,7 +20,7 @@ internal sealed class CreateOrderCommandHandler : IRequestHandler<CreateOrderCom
 
     public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = await _orderRepository.CreateOrderAsync(request.CreateOrderDtos, cancellationToken);
+        var order= await _orderRepository.CreateAsync(request.CreateOrderDtos, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         await _mediator.Publish(new OrderDomainEvent(order));

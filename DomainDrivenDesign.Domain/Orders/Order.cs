@@ -2,7 +2,6 @@
 using DomainDrivenDesign.Domain.Orders;
 using DomainDrivenDesign.Domain.Shared;
 using DomainDrivenDesignUdemy.Domain.Orders;
-using static DomainDrivenDesign.Domain.Orders.Order;
 
 public sealed class Order : Entity
 {
