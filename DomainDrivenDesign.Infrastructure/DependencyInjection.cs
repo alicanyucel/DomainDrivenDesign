@@ -1,6 +1,7 @@
 ﻿
 using DomainDrivenDesign.Domain.Abstractions;
 using DomainDrivenDesign.Domain.Categories;
+using DomainDrivenDesign.Domain.Orders;
 using DomainDrivenDesign.Domain.Products;
 using DomainDrivenDesign.Domain.Users;
 using DomainDrivenDesign.Infrastructure.DataContext;
@@ -17,7 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<OrderRepository, OrderRepository>();
+        services.AddScoped<IOrderRespository, OrderRepository>();
         return services;
     }
 }
